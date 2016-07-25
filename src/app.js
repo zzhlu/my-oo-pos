@@ -2,6 +2,7 @@ const fixture = require('./fixtures');
 const loadAllItems = fixture.loadAllItems;
 const loadPromotions = fixture.loadPromotions;
 const CartItem = require('./models/cart-item');
+const ReceiptItem = require('./models/receipt-item');
 
 function printReceipt(tags) {
 
@@ -48,7 +49,7 @@ function buildReceiptItems(cartItems, allPromotions) {
 
     const {saved, subtotal} = discount(cartItem.count, cartItem.item.price, promotionType);
 
-    return {cartItem, saved, subtotal};
+    return new ReceiptItem(cartItem, saved, subtotal);
   });
 }
 
