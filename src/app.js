@@ -8,23 +8,10 @@ function printReceipt(tags) {
 
   const cartItems = CartItem.buildCartItems(tags, Item.all());
   const receiptItems = ReceiptItem.buildReceiptItems(cartItems, Promotion.all());
-  const receipt = buildReceipt(receiptItems);
+  const receipt = Receipt.buildReceipt(receiptItems);
   const receiptText = buildReceiptText(receipt);
 
   console.log(receiptText);
-}
-
-function buildReceipt(receiptItems) {
-
-  let total = 0;
-  let savedTotal = 0;
-
-  for (const receiptItem of receiptItems) {
-    total += receiptItem.subtotal;
-    savedTotal += receiptItem.saved;
-  }
-
-  return new Receipt(receiptItems, total, savedTotal);
 }
 
 function buildReceiptText(receipt) {
